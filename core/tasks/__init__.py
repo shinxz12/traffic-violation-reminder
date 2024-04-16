@@ -1,0 +1,1 @@
+from .send_email_task import send_mail_for_template

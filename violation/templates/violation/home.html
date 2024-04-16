@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% comment %} <h1 class="text-center text-4xl text-yellow-800">Đăng ký nhận thông báo vi phạm phạt nguội</h1> {% endcomment %}
+<div class="flex flex-col items-center justify-center h-screen light">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-4">Nhap thong tin</h2>
+
+        <form class="flex flex-col" method="POST" action="/">
+        {% csrf_token %}
+        <select name="type" class="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" required>
+            <option value="CAR">Oto</option>
+            <option value="MOTO_BIKE">Xe may</option>
+            <option value="ELECTRIC_BIKE">Xe dap dien</option>
+        </select>
+        <input name="number_plate" placeholder="Bien so: 30A12345" class="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text" required>
+        <input name="email" placeholder="Email" class="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="email" required>
+        <input name="phone_number" placeholder="SDT" class="bg-gray-100 text-gray-800 border-0 rounded-md p-2 mb-4 focus:bg-gray-200 focus:outline-none focus:ring-1 focus:ring-blue-500 transition ease-in-out duration-150" type="text">
+
+        <button class="bg-gradient-to-r from-indigo-500 to-blue-500 text-white font-bold py-2 px-4 rounded-md mt-4 hover:bg-indigo-600 hover:to-blue-600 transition ease-in-out duration-150" type="submit">Submit</button>
+        </form>
+    </div>
+    </div>
+{% endblock content %}

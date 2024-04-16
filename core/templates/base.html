@@ -1,0 +1,88 @@
+
+{% load static i18n %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge" />
+<title>
+  {% block title %}
+  Đăng ký nhận thông báo vi phạm phạt nguội
+{% endblock title %}
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description"
+    content="Behold My Awesome Project!" />
+<meta name="author"
+    content="shinxz12" />
+<link rel="icon" href="{% static 'images/favicons/favicon.ico' %}" />
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{% block css %}
+<!-- Your stuff: Third-party CSS libraries go here -->
+<!-- This file stores project-specific CSS -->
+
+
+{% endblock css %}
+<!-- Le javascript
+================================================== -->
+{# Placed at the top of the document so pages load faster with defer #}
+{% block javascript %}
+
+
+{% endblock javascript %}
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="mb-1">
+<nav class="flex items-center justify-between mt-4">
+  <div class="inline-flex gap-10 items-center ml-10">
+      <img src="{% static 'img/logo.png' %}" class="w-16" />
+      {% comment %} <a href="{% url 'qrcode-generator' %}">QR Code</a>
+      <a href="{% url 'qrpay-generator' %}">QR Pay</a> {% endcomment %}
+    </div>
+</nav>
+</div>
+<div class="p-4">
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+      {{ message }}
+      <button type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"></button>
+    </div>
+  {% endfor %}
+{% endif %}
+{% block content %}
+  <p>Use this document as a way to quick start any new project.</p>
+{% endblock content %}
+</div>
+<!-- /container -->
+<div class="flex-col gap-4 flex items-center justify-center fixed top-1/2 right-1/2 transform translate-x-14 hidden" id="loading">
+  <div class="w-28 h-28 border-8 text-blue-400 text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-blue-400 rounded-full">
+    <svg viewBox="0 0 24 24" fill="currentColor" height="1em" width="1em" class="animate-ping">
+      <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zm-6 7.2c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z"></path>
+    </svg>
+  </div>
+</div>
+{% block modal %}
+{% endblock modal %}ls
+ls
+{% block inline_javascript %}
+{% comment %}
+Script tags with only code, no src (defer by default). To run
+with a "defer" so that you run inline code:
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    /* Run whatever you want */
+  });
+</script>
+{% endcomment %}
+{% endblock inline_javascript %}
+</body>
+</html>
