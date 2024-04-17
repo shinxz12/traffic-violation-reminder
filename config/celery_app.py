@@ -1,6 +1,7 @@
 import os
 
 from celery import Celery
+from celery.schedules import crontab
 
 # set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
@@ -18,10 +19,8 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    'add-every-30-seconds': {
+    'daily-check-traffic-violation': {
         'task': 'violation.tasks.check_send_email.check_send_email',
-        'schedule': 10.0,
-        # 'args': (16, 16)
+        'schedule': crontab(minute=0, hour=0),
     },
 }
-# app.conf.timezone = 'UTC'

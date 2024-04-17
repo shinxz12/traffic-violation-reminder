@@ -195,3 +195,43 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 CELERY_WORKER_SEND_TASK_EVENTS = True
 # https://docs.celeryq.dev/en/stable/userguide/configuration.html#std-setting-task_send_sent_event
 CELERY_TASK_SEND_SENT_EVENT = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv("REDIS_URL", "redis://localhost:6379"),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            # Mimicing memcache behavior.
+            # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
+            "IGNORE_EXCEPTIONS": True,
+        },
+    }
+}
+
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = env('EMAIL_PORT')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
+}

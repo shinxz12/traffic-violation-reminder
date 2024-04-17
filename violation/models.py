@@ -9,3 +9,4 @@ class Vehicle(models.Model):
     number_plate = models.CharField(max_length=32, unique=True)
     email = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=32, null=True, blank=True)
+    last_violation = models.DateTimeField(null=True, blank=True)
