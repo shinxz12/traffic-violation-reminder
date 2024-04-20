@@ -17,7 +17,8 @@ class HomeView(TemplateView):
             errors.pop("number_plate", None)
             if errors:
                 messages.error(request, errors)
-
-        Vehicle.objects.update_or_create(defaults=serializer.validated_data)
+        data = serializer.validated_data
+        number_plate = data.pop("number_plate")
+        Vehicle.objects.update_or_create(number_plate=number_plate, defaults=data)
         messages.success(request, "Dang ky thanh cong")
         return redirect("/")
