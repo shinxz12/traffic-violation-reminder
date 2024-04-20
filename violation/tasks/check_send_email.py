@@ -11,7 +11,7 @@ DATETIME_FORMAT = "%H:%M, %d/%m/%Y"
 logger = logging.getLogger(__name__)
 
 
-@shared_task
+@shared_task(soft_time_limit=120000,time_limit=130000)
 # @transaction.atomic
 def check_send_email():
     vehicles = Vehicle.objects.filter(email__isnull=False, type__isnull=False, number_plate__isnull=False)
