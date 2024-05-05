@@ -22,9 +22,9 @@ def check_send_email():
         email = vehicle.email
         checker = VehicleChecker(number_plate, vehicle_type)
         result = checker.check()
-        checker.driver.close()
         
         if not result:
+            checker.driver.close()
             logger.info(f"Not found!")
             continue
 
@@ -42,3 +42,4 @@ def check_send_email():
             }
             logger.info(f"Send to email {email} - {number_plate}")
             send_mail_for_template.delay(None, [email], "violation/email/notification", context)
+        checker.driver.close()
